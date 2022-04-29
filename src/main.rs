@@ -49,7 +49,7 @@ fn read() {
     for i in 0..zip.len() {
         let mut file = zip.by_index(i).unwrap();
         let name = file.name();
-        if name.starts_with("discord-api-docs-main/docs/") & name.ends_with(".md") {
+        if name.starts_with("discord-api-docs-main/docs/") && name.ends_with(".md") {
             let mut data = String::from("");
             file.read_to_string(&mut data).unwrap();
 
