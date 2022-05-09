@@ -40,7 +40,7 @@ fn read() {
     )
     .unwrap();
 
-    let variable_re = Regex::new(r#"\{([\w.]+)#.*\}"#).unwrap();
+    let variable_re = Regex::new(r#"\{([\w.]+)#.*?\}"#).unwrap();
 
     let mut zip =
         zip::ZipArchive::new(File::open("ddocs.zip").expect("ZIP file could not be opened"))
@@ -57,7 +57,7 @@ fn read() {
                 let endp = endp.unwrap();
                 let method = endp.get(1).unwrap().as_str().to_owned();
                 let endpoint = variable_re
-                    .replace(endp.get(2).unwrap().as_str(), "{$1}")
+                    .replace_all(endp.get(2).unwrap().as_str(), "{$1}")
                     .deref()
                     .to_owned();
 
